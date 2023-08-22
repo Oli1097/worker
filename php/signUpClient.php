@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $city = $_POST["city"];
     $contact = $_POST["contact"];
     $pass = $_POST["pass"];
-    $confirm = $_POST["confirm"];
+    //$confirm = $_POST["confirm"];
     
     // Process and validate other form fields here
     
@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $servername = "localhost";
     $username = "root";
     $password = "";
-    $database = "urban-workers";
+    $database = "urban-workers1";
 
     $conn = new mysqli($servername, $username, $password, $database);
 
@@ -25,8 +25,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "INSERT INTO signupclient (full_name, email, address, city, contact, pass, confirm)
-            VALUES ('$full_name', '$email', '$address', '$city', '$contact',  '$pass', '$confirm')";
+    $sql = "INSERT INTO signupclient (full_name, email, address, city, contact, pass)
+            VALUES ('$full_name', '$email', '$address', '$city', '$contact',  '$pass')";
     
     if ($conn->query($sql) === TRUE) {
         $fetch_query = "SELECT ID FROM signupclient WHERE email='$email'";

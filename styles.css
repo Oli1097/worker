@@ -156,7 +156,12 @@
   color: wheat;
   /* Add a slight scale effect on hover */
 }
-
+.eye{
+  position:absolute;
+}
+#hide1{
+  display: none;
+}
 /* footer */
 .foot {
   background: rgb(80, 76, 76);

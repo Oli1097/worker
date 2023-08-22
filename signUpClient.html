@@ -7,6 +7,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="navbar.css"> <!-- Include the navbar CSS -->
     <link rel="icon" href="images/search-employee-8969.png" type="image/png">
@@ -51,7 +53,7 @@
 
                                     <div class="md:col-span-5 font-semibold text-gray-600 mb-1">
                                         <label for="email">Email Address</label>
-                                        <input type="text" name="email" id="email"
+                                        <input type="email" name="email" id="email"
                                             class="h-10 border mt-1 rounded px-4 w-full bg-gray-100" value=""
                                             placeholder="email@domain.com" />
                                     </div>
@@ -82,19 +84,18 @@
                                             placeholder="+880" />
                                     </div>
 
-                                    <div class="md:col-span-3 font-semibold text-gray-600">
+                                    <div class="md:col-span-3 font-semibold text-gray-600 mb-1 password-input">
                                         <label for="email">Password</label>
-                                        <input type="text" name="pass" id="email"
-                                            class="h-10 border mt-1 rounded px-4 w-full bg-gray-100" value=""
-                                            placeholder="" />
-                                    </div>
-
-                                    <div class="md:col-span-3 font-semibold text-gray-600">
-                                        <label for="email">Confirm Password</label>
-                                        <input type="text" name="confirm" id="email"
-                                            class="h-10 border mt-1 rounded px-4 w-full bg-gray-100" value=""
-                                            placeholder="" />
-                                    </div>
+                                        <div class="password-input-wrapper">
+                                          <input type="password" name="pass" id="password" class="h-10 border mt-1 rounded px-4 w-full bg-gray-100" value="" placeholder="" />
+                                          <button type="button" id="togglePassword" class="eye-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+                                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2 9S7 4 9 2s5 2 5 2M9 16s3 2 5 2 5-2 5-2M12 19s1.5-1 2.5-3" />
+                                            </svg>
+                                          </button>
+                                        </div>
+                                 
                                 </div>
 
 
@@ -118,5 +119,34 @@
     </div>
 
 </form>
+<style>
+    .password-input-wrapper {
+      position: relative;
+    }
+  
+    .eye-icon {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+  <script>
+    const passwordInput = document.getElementById("password");
+    const togglePasswordButton = document.getElementById("togglePassword");
+  
+    togglePasswordButton.addEventListener("click", () => {
+      if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        togglePasswordButton.innerHTML = '<i class="far fa-eye-slash"></i>';
+      } else {
+        passwordInput.type = "password";
+        togglePasswordButton.innerHTML = '<i class="far fa-eye"></i>';
+      }
+    });
+  </script>
 
 </body>

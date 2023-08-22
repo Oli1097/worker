@@ -134,6 +134,79 @@
                     </a>
                 </div>
             </div>
+
+            <div class="allServices max">
+
+                <div class="box">
+                    <a href="php/fetch.php?service=AC%20Servicing">
+                        <img src="images/ac.jpg" alt="AC Servicing">
+                        <h1>AC Servicing</h1>
+                    </a>
+                </div>
+                <div class="box">
+                    <!-- <img src="images/paint.webp" alt="">
+                <h1>
+                    <a href="php/fetch.php"> 
+                        Painting Servicing
+                    </a>
+
+
+                </h1> -->
+
+                    <a href="php/fetch.php?service=Painting%20Servicing">
+                        <img src="images/paint.webp" alt="Painting Servicing">
+                        <h1>Painting Servicing</h1>
+                    </a>
+                </div>
+                <div class="box">
+                    <a href="php/fetch.php?service=Home%20cleaning">
+                        <img src="images/clean.jpg" alt="Home cleaning">
+                        <h1>Home Cleaning</h1>
+                    </a>
+                </div>
+                <div class="box">
+                    <a href="php/fetch.php?service=Plumbing%20Services">
+                        <img src="images/plumb.webp" alt="Plumbing Services">
+                        <h1>Plumbing Services</h1>
+                    </a>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
             <div class="allServices max">
                 <div class="box">
                     <img src="images/shift.jpg" alt="">

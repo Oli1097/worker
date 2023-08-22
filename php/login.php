@@ -6,7 +6,7 @@ if (isset($_POST["login"])) {
     $pass = $_POST["pass"];
 
     $host = "localhost";
-    $dbname = "urban-workers";
+    $dbname = "urban-workers1";
     $dbpass = "";
     $dbuname = "root";
 
@@ -16,7 +16,7 @@ if (isset($_POST["login"])) {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "SELECT * FROM signupworkers WHERE email='$email' AND pass='$pass'";
+    $sql = "SELECT * FROM signupclient WHERE email='$email' AND pass='$pass'";
     $result = $conn->query($sql);
 
     if ($result->num_rows == 1) {
