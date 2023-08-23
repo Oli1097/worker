@@ -1,5 +1,5 @@
 <?php
-echo "hi";
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $full_name = $_POST["full_name"];
     $email = $_POST["email"];
@@ -8,6 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $contact = $_POST["contact"];
     $services = $_POST["services"];
     $pass = $_POST["pass"];
+    $work_experience=$_POST["work_experience"];
     //$confirm = $_POST["confirm"];
     
     // Process and validate other form fields here
@@ -44,8 +45,8 @@ echo '<script>alert("Welcome to Geeks for Geeks")</script>';
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "INSERT INTO signupworkers (full_name, email, address, city, contact, services, pass, picture)
-            VALUES ('$full_name', '$email', '$address', '$city', '$contact', '$services', '$pass','$uploadPath')";
+    $sql = "INSERT INTO signupworkers (full_name, email, address, city, contact, services, pass,work_experience, picture)
+            VALUES ('$full_name', '$email', '$address', '$city', '$contact', '$services', '$pass','$work_experience','$uploadPath')";
 
     if ($conn->query($sql) === TRUE) {
         header("Location: ../signUpWorker.html"); 

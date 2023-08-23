@@ -27,7 +27,7 @@
     <div class="nav">
         <div class="navbar">
             <div class="navbar-start">
-                <a href="index.html" class="btn btn-ghost normal-case text-xl ">Urban Workers</a>
+                <a href="index1.php" class="btn btn-ghost normal-case text-xl ">Urban Workers</a>
             </div>
             <div class="navbar-center text-gray-900 font-semibold">
                 <ul class="menu menu-horizontal px-1">
@@ -39,16 +39,18 @@
             </div>
             <div class="navbar-end">
                 <div class=" inline-block text-left">
-                    <button type="button" class="btn-login" id="login-button">
-                        Login
-                    </button>
+                    <?php
+                    session_start();
+                    if(isset($_SESSION['email'])) {
+                        echo '<p>Welcome, ' . $_SESSION['email'] . '</p>';
+                        // header("Location: ../index.htnl"); // Redirect to main page
 
-                    <div id="login-options" class="hidden absolute right-0 mt-2 w-32 rounded-md bg-red shadow-lg">
-                        <ul class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="login-button">
-                            <li><a href="getStarted.html" class="block px-4 py-2 text-sm text-gray-900 hover:bg-green-500" role="menuitem">User</a></li>
-                            <li><a href="admin.php" class="block px-4 py-2 text-sm text-gray-900 hover:bg-green-500" role="menuitem">Admin</a></li>
-                        </ul>
-                    </div>
+                     echo '<a href="index.html">Logout</a>';
+                    } else {
+                        echo '<button type="button" class="btn-login open-modal" data-modal="login-modal">Login</button>';
+                        echo '<button type="button" class="btn-signup">Sign up</button>';
+                    }
+                    ?>
                 </div>
             </div>
         </div>
