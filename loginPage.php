@@ -1,3 +1,10 @@
+<?php
+session_start(); // Start the session
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Your existing code
+}
+?>
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 
@@ -65,6 +72,10 @@
                                     $dbuname = "root";
 
                                     $conn = new mysqli($host, $dbuname, $dbpass, $dbname);
+                                    if($email=="admin@gmail.com" && $pass=="admin")
+                                    {
+                                        header("Location: admin.php");
+                                    }
 
                                     if ($conn->connect_error) {
                                         die("Connection failed: " . $conn->connect_error);
@@ -76,6 +87,7 @@
                                     if ($result !== false && $result->num_rows == 1) {
                                         $_SESSION["email"] = $email;
                                         header("Location: index1.php"); // Redirect to main page
+                                        //header("Location: index1.php?email=" . urlencode($email));
                                         exit();
                                     } else {
                                         $error_message = "Invalid password. Please try again.";

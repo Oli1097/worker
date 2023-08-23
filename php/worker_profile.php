@@ -72,7 +72,8 @@
     <div class="nav bg-gray-300 rounded-xl">
         <div class="navbar">
             <div class="navbar-start">
-                <a href="http://localhost/urban-workers-main/index1.php" class="text-green-900 font-weight:900 btn btn-ghost normal-case text-2xl font-bold">Urban Workers</a>
+                <a href="http://localhost/urban-workers/index.html"
+                    class="text-green-900 font-weight:900 btn btn-ghost normal-case text-2xl font-bold">Urban Workers</a>
             </div>
         </div>
     </div>
@@ -93,25 +94,7 @@
             $sql = "SELECT * FROM signupworkers WHERE email = '$email'";
             $data = mysqli_query($conn, $sql);
             $count = mysqli_num_rows($data);
-            if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                if (isset($_POST['approve'])) {
-                    $email = $_POST['email'];
-                    $updateSql = "UPDATE signupworkers SET availability = 'available' WHERE email = '$email'";
-                    if ($conn->query($updateSql) === TRUE) {
-                        echo "Status updated successfully.";
-                    } else {
-                        echo "Error updating record: " . $conn->error;
-                    }
-                } elseif (isset($_POST['reject'])) {
-                    $email = $_POST['email'];
-                    $updateSql = "UPDATE signupworkers SET availability = 'unavailable' WHERE email = '$email'";
-                    if ($conn->query($updateSql) === TRUE) {
-                        echo "Status updated successfully.";
-                    } else {
-                        echo "Error updating record: " . $conn->error;
-                    }
-                }
-            }
+
             if ($count != 0) {
                 while ($result = mysqli_fetch_assoc($data)) {
                     echo "
@@ -128,12 +111,78 @@
                             <input type='hidden' name='email' value='" . $email . "'>
                             <input type='submit' name='approve' value='available' />
                             <input type='submit' name='reject' value='unavailable' />
+                            <input type='submit' value='send_request' />
                         </form>
                     </div>";
+
+                    $hireRequestSql = "SELECT client_email, status FROM hire_request WHERE worker_email = '{$result['email']}'";
+                    $hireRequestData = mysqli_query($conn, $hireRequestSql);
+                    if ($hireRequestData && mysqli_num_rows($hireRequestData) > 0) {
+                        echo "<div class='card-info'>";
+                        echo "<h3>Hire Requests</h3>";
+                        while ($hireRequestResult = mysqli_fetch_assoc($hireRequestData)) {
+                            echo "<p>Client Email: " . $hireRequestResult['client_email'] . "</p>";
+                            echo "<p>Status: " . $hireRequestResult['status'] . "</p>";
+                            echo "<div class='action-buttons'>";
+                            echo "<form method='post'>
+                                    <input type='hidden' name='email' value='" . $email . "'>
+                                    <input type='hidden' name='worker_email' value='" . $result['email'] . "'>
+                                    <input type='hidden' name='client_email' value='" . $hireRequestResult['client_email'] . "'>
+                                    <input type='submit' name='approve_request' value='Approve Request' />
+                                </form>";
+                            echo "<form method='post'>
+                                    <input type='hidden' name='email' value='" . $email . "'>
+                                    <input type='hidden' name='worker_email' value='" . $result['email'] . "'>
+                                    <input type='hidden' name='client_email' value='" . $hireRequestResult['client_email'] . "'>
+                                    <input type='submit' name='reject_request' value='Reject Request' />
+                                </form>";
+                            echo "</div>";
+
+                            if ($hireRequestResult['status'] == 'approved') {
+                                echo "<form method='post'>
+                                        <input type='hidden' name='email' value='" . $email . "'>
+                                        <input type='hidden' name='worker_email' value='" . $result['email'] . "'>
+                                        <input type='hidden' name='client_email' value='" . $hireRequestResult['client_email'] . "'>
+                                        <label for='rating'>Rating (1-5):</label>
+                                        <input type='number' name='rating' min='1' max='5' required>
+                                        <br>
+                                        <label for='comment'>Review:</label>
+                                        <textarea name='comment' rows='4' required></textarea>
+                                        <br>
+                                        <input type='submit' name='submit_review' value='Submit Review' />
+                                    </form>";
+                            }
+                        }
+                        echo "</div>";
+                    }
+
+                    echo "</div>";
                 }
             } else {
                 echo "<p>No data available</p>";
             }
+
+            // Handle approve or reject request
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                // ... Existing form submission handling ...
+
+                // Handle review and rating submission
+                if (isset($_POST['submit_review'])) {
+                    $worker_email = $_POST['worker_email'];
+                    $client_email = $_POST['client_email'];
+                    $rating = $_POST['rating'];
+                    $comment = $_POST['comment'];
+
+                    // Insert the review and rating into the database (adjust table name as needed)
+                    $insertReviewSql = "INSERT INTO review (worker_email, client_email, rating, comment) VALUES ('$worker_email', '$client_email', $rating, '$comment')";
+                    if ($conn->query($insertReviewSql) === TRUE) {
+                        echo "Review submitted successfully.";
+                    } else {
+                        echo "Error submitting review: " . $conn->error;
+                    }
+                }
+            }
+
             $conn->close();
         } else {
             echo "<p>Email parameter missing.</p>";

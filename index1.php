@@ -41,11 +41,14 @@
                 <div class=" inline-block text-left">
                     <?php
                     session_start();
-                    if(isset($_SESSION['email'])) {
+                    if (isset($_SESSION['email'])) {
                         echo '<p>Welcome, ' . $_SESSION['email'] . '</p>';
-                        // header("Location: ../index.htnl"); // Redirect to main page
+                        // header("Location: ../index.html"); // Redirect to main page
 
-                     echo '<a href="index.html">Logout</a>';
+                        //echo '<a href="index.html">Logout</a>';
+                      echo '<a href="index.html" class="btn-signup-red">Logout</a>';
+
+
                     } else {
                         echo '<button type="button" class="btn-login open-modal" data-modal="login-modal">Login</button>';
                         echo '<button type="button" class="btn-signup">Sign up</button>';
@@ -88,42 +91,15 @@
 
     </header>
 
-
+   
     <section class="our-Services" id="service">
         <div class="Services">
             <h1>Our Services
             </h1>
             <hr>
         </div>
-        <div class="allServices max">
-            <div class="box">
-                <a href="php/fetch.php?service=Shifting%20Services">
-
-                    <img src="images/shift.jpg" alt="">
-                    <h1>Shifting Services</h1>
-            </div>
-
-            <div class="box">
-                <a href="php/fetch.php?service=Beauty%20Care">
-
-                    <img src="images/beauty.jpg" alt="">
-                    <h1>Beauty Care</h1>
-            </div>
-
-            <div class="box">
-                <a href="php/fetch.php?service=Laptop%20Services">
-
-                    <img src="images/laptop.jpg" alt="">
-                    <h1>Laptop Services</h1>
-            </div>
-            <div class="box">
-                <a href="php/fetch.php?service=CCTV%20Services">
-
-                    <img src="images/cctv.jpg" alt="">
-                    <h1>CCTV Camera Services</h1>
-            </div>
-
-        </div>
+    
+      
         <div class="allServices max">
             <div class="box">
                 <a href="php/fetch.php?service=Home%20Tutor">
@@ -160,14 +136,7 @@
                     <!-- </a> -->
             </div>
             <div class="box">
-                <!-- <img src="images/paint.webp" alt="">
-<h1>
-    <a href="php/fetch.php"> 
-        Painting Servicing
-    </a>
 
-
-</h1> -->
 
                 <a href="php/fetch.php?service=Painting%20Servicing">
                     <img src="images/paint.webp" alt="Painting Servicing">
@@ -175,47 +144,53 @@
                     <!-- </a> -->
             </div>
             <div class="box">
-                <a href="php/fetch.php?service=Home%20cleaning">
+                <a href="php/fetch.php?service=Home%20Cleaning">
                     <img src="images/clean.jpg" alt="Home cleaning">
                     <h1>Home Cleaning</h1>
                     <!-- </a> -->
             </div>
             <div class="box">
-                <a href="php/fetch.php?service=Plumbing%20Services">
-                    <img src="images/plumb.webp" alt="Plumbing Services">
-                    <h1>Plumbing Services</h1>
-                    <!-- </a> -->
+                <!-- <a href="php/fetch.php?service=Plumbing%20Services"> -->
+                <img src="images/plumb.webp" alt="Plumbing Services">
+                <h1>Plumbing Services</h1>
+                <!-- </a> -->
             </div>
         </div>
 
-        <!--
-        <div class="max-w-screen-xl mx-auto border-solid border-gray-300">
-            <div class="carousel w-full">
-                <div id="item1" class="carousel-item w-full h-1/2">
-                    <img src="images/home6.avif" class="" />
-                </div>
-                <div id="item2" class="carousel-item w-full h-1/2">
-                    <img src="images/homey.jpg" class="" />
-                </div>
-                <div id="item3" class="carousel-item w-full">
-                    <img src="images/home4.avif" class="" />
-                </div>
-                <div id="item4" class="carousel-item w-full">
-                    <img src="images/home5.avif" class="" />
-                </div>
+        <div class="allServices max">
+            <div class="box">
+                <a href="php/fetch.php?service=Shifting%20Services">
+
+                    <img src="images/shift.jpg" alt="">
+                    <h1>Shifting Services</h1>
             </div>
-            <div class="flex justify-center w-full py-2 gap-2">
-                <a href="#item1" class="btn btn-xs">1</a>
-                <a href="#item2" class="btn btn-xs">2</a>
-                <a href="#item3" class="btn btn-xs">3</a>
-                <a href="#item4" class="btn btn-xs">4</a>
+
+            <div class="box">
+                <a href="php/fetch.php?service=Beauty%20Care">
+
+                    <img src="images/beauty.jpg" alt="">
+                    <h1>Beauty Care</h1>
             </div>
+
+            <div class="box">
+                <a href="php/fetch.php?service=Laptop%20Services">
+
+                    <img src="images/laptop.jpg" alt="">
+                    <h1>Laptop Services</h1>
+            </div>
+            <div class="box">
+                <a href="php/fetch.php?service=CCTV%20Servicing">
+
+                    <img src="images/cctv.jpg" alt="">
+                    <h1>CCTV Servicing</h1> </a>
+            </div>
+
         </div>
-         -->
+
+
     </section>
-
-    <section id="about">
-        <section class="flex items-center bg-stone-100 lg:h-screen  ">
+    <div id="about">
+        <section class="flex items-center bg-stone-100 lg:h-screen mt-10 ">
             <div class="justify-center flex-1 max-w-6xl py-4 mx-auto lg:py-6 md:px-6">
                 <div class="px-4 mb-1 md:text-center md:mb-20">
                     <p class="mb-6 text-6xl font-bold text-blue-800 dark:text-black-400">
@@ -326,10 +301,11 @@
                 </div>
             </div>
         </section>
-    </section>
+    </div>
+
     <section id="faq">
 
-        <!-- <div class="container"> -->
+        <!-- <div class="container"> --> -->
         <h1 class="text-4xl font-bold text-black-400 mb-7 text-center mt-10">
             "Most common questions about us 🔥"
 

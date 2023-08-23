@@ -1,33 +1,40 @@
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "GET") {
-    $ID = $_GET['ID'];
-    $email = $_GET['email'];
-    $send_request=$_GET['send_request'];
-    
 
-    
-    // You can perform additional validation and sanitation on ID and email if needed
-    
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $database = "urban-workers1";
+session_start(); // Make sure to start the session
 
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $database);
-
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    // Perform the database update to indicate that a request has been sent
-    $sql = "UPDATE signupworkers SET send_request = $send_request+1 WHERE email = '$email'";
-    if ($conn->query($sql) === TRUE) {
-        echo "Request sent successfully.";
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST['worker_id']) && isset($_POST['worker_email']) && isset($_SESSION['email'])) {
+        $request_id = $_POST['worker_id'];
+        $worker_email = $_POST['worker_email'];
+        $client_email = $_SESSION['email'];
+        
+        // Assuming you have a database connection established
+        $servername = "localhost";
+        $username = "root";
+        $password = "";
+        $database = "urban-workers1";
+        $conn = new mysqli($servername, $username, $password, $database);
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+        
+        // Assuming you have a table named hire_requests with columns: request_id, worker_email, client_email, and status
+        $status = "pending";
+        $insertSql = "INSERT INTO hire_request (request_id, client_email, worker_email, status) 
+                      VALUES ('$request_id', '$client_email', '$worker_email', '$status')";
+   
+        if ($conn->query($insertSql) === TRUE) {
+            echo "Request sent successfully.";
+        } else {
+            echo "Error sending request: " . $conn->error;
+        }
+        
+        $conn->close();
     } else {
-        echo "Error sending request: " . $conn->error;
+        echo "Invalid data received.";
     }
-
-    $conn->close();
+} else {
+    echo "Invalid request method.";
 }
+
 ?>

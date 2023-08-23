@@ -39,7 +39,7 @@
             align-items: center;
             background-color: #dbc7c2;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            padding-bottom:20px ;
+            padding-bottom: 20px;
         }
 
         .card img {
@@ -75,7 +75,7 @@
     <div class="nav bg-gray-300 rounded-xl">
         <div class="navbar">
             <div class="navbar-start">
-                <a href="http://localhost/urban-workers-main/index1.php" class="text-green-900 font-weight:900 btn btn-ghost normal-case text-2xl font-bold">Urban Workers</a>
+                <a href="http://localhost/urban-workers/index1.php" class="text-green-900 font-weight:900 btn btn-ghost normal-case text-2xl font-bold">Urban Workers</a>
             </div>
         </div>
     </div>
@@ -96,6 +96,8 @@
             $sql = "SELECT * FROM signupworkers WHERE services = '$service'";
             $data = mysqli_query($conn, $sql);
             $count = mysqli_num_rows($data);
+
+            
             if ($count != 0) {
                 while ($result = mysqli_fetch_assoc($data)) {
                     echo "
@@ -108,32 +110,16 @@
                             <p>Contact: " . $result['contact'] . "</p>
                             <p>Ratings: " . $result['ratings'] . "</p>
                             <p>Status: " . $result['status'] . "</p>
-                            <p>Send Request: " . $result['send_request'] . "</p>
+                             <p>Send Request: " . $result['send_request'] . "</p>
 
-                            <p>
-                            <form action='send_request.php' method='get'> <!-- Changed method to post -->
-                            <input type='hidden' name='ID' value='" . $result['ID'] . "'>
-                            <input type='hidden' name='email' value='" . $result['email'] . "'>
-                            <input type='hidden' name='send_request' value='" . $result['send_request'] . "'>
-                            <button type='submit'>Send Request</button>
-                            </form>
-                            </p>
-                            
-                            <p>
-                            <form action='updaterating.php' method='get'>
-                            <input type='hidden' name='ID' value='" . $result['ID'] . "'>
-                            <input type='hidden' name='email' value='" . $result['email'] . "'>
-                            <label for='rating'>Rating:</label>
-                            <select name='ratings' id='ratings'>
-                            <option value='1'>1</option>
-                            <option value='2'>2</option>
-                            <option value='3'>3</option>
-                            <option value='4'>4</option>
-                            <option value='5'>5</option>
-                            </select>
-                            <input type='submit' value='Submit Rating'>
-                            </form>
-                            </p>
+                             <p>
+                             <form action='send_request.php' method='post'>
+                             <input type='hidden' name='worker_id' value='" . $result['ID'] . "'>
+                             <input type='hidden' name='worker_email' value='" . $result['email'] . "'>
+                             <button type='submit'>Send Request</button>
+                             </form>
+                             </p>
+                             
                         </div>
                     </div>";
                 }

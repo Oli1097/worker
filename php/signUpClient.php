@@ -1,4 +1,6 @@
+
 <?php
+session_start(); 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $full_name = $_POST["full_name"];
     $email = $_POST["email"];
@@ -25,8 +27,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "INSERT INTO signupclient (full_name, email, address, city, contact, pass)
-            VALUES ('$full_name', '$email', '$address', '$city', '$contact',  '$pass')";
+    $sql = "INSERT INTO signupclient (full_name, email, address, contact, pass)
+            VALUES ('$full_name', '$email', '$address', '$contact',  '$pass')";
     
     if ($conn->query($sql) === TRUE) {
         $fetch_query = "SELECT ID FROM signupclient WHERE email='$email'";
@@ -35,6 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
             $fetched_id = $row["ID"];
+            $_SESSION["email"] = $email;
             header("Location: ../index1.php");
         } else {
             echo "No ID found.";

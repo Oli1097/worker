@@ -28,7 +28,7 @@
   </div>
   <!-- component -->
   <form method="POST" action="php/signupWorker.php" enctype="multipart/form-data">
-    <div class="min-h-screen p-6 bg-gray-100 flex items-center justify-center">
+    <div class="min-h-screen text-black-900 p-6 bg-gray-100 flex items-center justify-center">
       <div class="container max-w-screen-lg mx-auto">
         <div>
           <h2 class="font-bold text-4xl text-gray-900">Registration Form</h2>
@@ -37,63 +37,83 @@
           <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-1">
             <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
               <div class="text-gray-900">
-                <p class="font-medium text-lg">Personal Details</p>
+                <p class="font-medium text-lg"> Worker Personal Details</p>
+                <h1></h1>
                 <p>Please fill out all the fields.</p>
               </div>
 
               <div class="lg:col-span-2">
                 <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
-                  <div class="md:col-span-5 font-semibold text-gray-600 mb-1">
+                  <div class="md:col-span-5 font-bold text-gray-600 mb-1">
                     <label for="full_name">Full Name</label>
                     <input type="text" name="full_name" id="full_name"
-                      class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" />
+                      class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" required/>
                   </div>
 
-                  <div class="md:col-span-5 font-semibold text-gray-600 mb-1">
+                  <div class="md:col-span-5 font-bold text-gray-600 mb-1">
                     <label for="email">Email Address</label>
                     <input type="email" name="email" id="email" class="h-10 border mt-1 rounded px-4 w-full bg-gray-100"
-                      value="" placeholder="email@domain.com" />
+                      value="" placeholder="email@domain.com"required />
                   </div>
 
 
-                  <div class="md:col-span-5 font-semibold text-gray-600 mb-1">
+                  <div class="md:col-span-5 font-bold text-gray-600 mb-1">
                     <label for="address">Address Street</label>
                     <input type="text" name="address" id="address"
-                      class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" placeholder="" />
+                      class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" placeholder="" required/>
                   </div>
 
 
-                  <div class="md:col-span-3 font-semibold text-gray-600 mb-1">
+                  <!-- <div class="md:col-span-3 font-bold text-gray-600 mb-1">
                     <label for="city">City name</label>
                     <select name="city" id="city" class="h-10 border mt-1 rounded px-4 w-full bg-gray-100">
                       <option value="city1">City 1</option>
                       <option value="city2">City 2</option>
-                      <option value="city3">City 3</option>
-                      <!-- Add more options here -->
+                      <option value="city3">City 3</option> 
                     </select>
-                  </div>
-                  <div class="md:col-span-2 font-semibold text-gray-600 mb-1">
-                    <label for="num">Contact No.</label>
-                    <input type="" name="contact" id="number" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                      value="" placeholder="+880" />
-                  </div>
-                  <div class="md:col-span-5 font-semibold text-gray-600 ">
+                  </div> -->
+
+
+                  <div class="md:col-span-3 font-bold text-gray-600 ">
                     <label>Your service</label>
                     <div class="h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
 
-                      <select name="services" id="city" class="h-10 border mt-1 rounded px-4 w-full bg-gray-100">
-                        <option value="AC Servicing">AC Servicing</option>
-                        <option value="Painting Servicing">Painting Servicing</option>
-                        <option value="Home cleaning">Home cleaning</option>
+                      <select name="services" class="h-10 border mt-1 text-large font-bold rounded px-4 py-2 w-full bg-gray-100">
+                        <option class="ser" value="Home Tutor">Home Tutor</option>
+                        <option class="ser" value="Health Care">Health Care</option>
+                        <option class="ser" value="Car Servicing">Car Servicing</option>
+                        <option class="ser" value="Laundry Servicing">Laundry Servicing</option>
+
+                        <option class="ser" value="AC Servicing">AC Servicing</option>
+                        <option class="ser" value="Painting Servicing">Painting Servicing</option>
+                        <option class="ser" value="Home cleaning">Home cleaning</option> 
+                        <option class="ser" value="Plumbing Servicing">Plumbing Servicing</option>
+
+                        <option class="ser" value="Shifting Servicing">Shifting Servicing</option>
+                        <option class="ser" value="Beauty Care">Beauty Care</option>
+                        <option class="ser" value="laptop Servicing">laptop Servicing</option>
+                        <option class="ser" value="CCTV Servicing ">CCTV Servicing</option>
                         
                         <!-- Add more options here -->
                       </select>
                     </div>
                   </div>
-                  <div class="md:col-span-3 font-semibold text-gray-600 mb-1 password-input">
+                  <div class="md:col-span-2 font-bold text-gray-600 mb-1">
+                    <label for="num">Contact No.</label>
+                    <input type="" name="contact" id="number" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                      value="" placeholder="+880" required/>
+                  </div>
+                  <div class="md:col-span-5 font-bold text-gray-600 mb-1">
+                    <label for="work_experience">work_experience</label>
+                    <input type="text" name="work_experience" id="work_experience"
+                      class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" placeholder="" />
+                  </div>
+                 
+                  
+                  <div class="md:col-span-3 font-bold text-gray-600 mb-1 password-input">
                     <label for="email">Password</label>
                     <div class="password-input-wrapper">
-                      <input type="password" name="pass" id="password" class="h-10 border mt-1 rounded px-4 w-full bg-gray-100" value="" placeholder="" />
+                      <input type="password" name="pass" id="password" class="h-10 border mt-1 rounded px-4 w-full bg-gray-100" value="" placeholder="" required/>
                       <button type="button" id="togglePassword" class="eye-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -102,20 +122,16 @@
                       </button>
                     </div>
                   </div>
-                  <div class="md:col-span-5 font-semibold text-gray-600 mb-1">
-                    <label for="work_experience">work_experience</label>
-                    <input type="text" name="work_experience" id="work_experience"
-                      class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" placeholder="" />
-                  </div>
                  
                 </div>
               </div>
-              <div class="md:col-span-3 font-semibold text-gray-600 text-center mt-2">
-                <label for="picture">Profile Picture</label>
-                <input type="file" name="picture" id="picture" class="mt-1">
+              <div class="md:col-span-3 font-bold  border-gray-300 text-gray-600 text-center mt-2">
+                <label for="picture">Add Profile Picture</label>
+                <br>
+                <input type="file" name="picture" id="picture" class="mt-2">
 
             </div>
-            <!-- <div class="md:col-span-5 font-semibold text-gray-600">
+            <!-- <div class="md:col-span-5 font-bold text-gray-600">
               <label for="button">client request</label>
               <input type="button" name="send_request" class="mt-1">
 
@@ -125,6 +141,7 @@
               <div class="md:col-span-5 text-right">
                 <div class="inline-flex items-end">
                   <input type="submit" value="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                 
 
                 </div>
               </div>
