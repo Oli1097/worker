@@ -42,7 +42,7 @@
                     <?php
                     session_start();
                     if (isset($_SESSION['email'])) {
-                        echo '<p>Welcome, ' . $_SESSION['email'] . '</p>';
+                        echo '<a href="php/user_info.php">' . $_SESSION['email'] . '</a>';
                         // header("Location: ../index.html"); // Redirect to main page
 
                         //echo '<a href="index.html">Logout</a>';
