@@ -8,12 +8,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $contact = $_POST["contact"];
     $work_experience=$_POST["work_experience"];
     $pass = $_POST["pass"];
+$Honorarium=$_POST["Honorarium"];
     
     //$confirm = $_POST["confirm"];
     
     // Process and validate other form fields here
-    
-    // Handling the uploaded image
     // Handling the uploaded image
 if (isset($_FILES["picture"]) && $_FILES["picture"]["error"] == 0) {
     $picture = $_FILES["picture"];
@@ -45,12 +44,14 @@ if (isset($_FILES["picture"]) && $_FILES["picture"]["error"] == 0) {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "INSERT INTO signupworkers (full_name, email, address, services,contact, work_experience, pass,picture)
-            VALUES ('$full_name', '$email', '$address',  '$services',  '$contact','$work_experience', '$pass','$uploadPath')";
+    $sql = "INSERT INTO signupworkers (full_name, email, address, services,contact, work_experience, Honorarium, pass,picture)
+            VALUES ('$full_name', '$email', '$address',  '$services',  '$contact','$work_experience','$Honorarium','$pass','$uploadPath')";
 
     if ($conn->query($sql) === TRUE) {
-        header("Location: ../signUpWorker.html"); 
-    } else {
+        echo "<script>alert('Signup successfully,wait for admin approval!'); window.location.href = '../index.html';</script>";
+        //echo "success";
+    }
+     else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
 

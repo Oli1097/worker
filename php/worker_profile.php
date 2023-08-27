@@ -8,6 +8,7 @@ if (!isset($_SESSION['email'])) {
     exit();
 }
 
+
 // Assuming you have a database connection
 $servername = "localhost";
 $username = "root";
@@ -24,11 +25,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['approve']) || isset($_POST['reject'])) {
         $availabilityStatus = isset($_POST['approve']) ? 'available' : 'unavailable';
         $email = $_POST['email'];
-        
+
         // Update worker availability in the database
         $updateAvailabilitySql = "UPDATE signupworkers SET availability = '$availabilityStatus' WHERE email = '$email'";
         if ($connection->query($updateAvailabilitySql) === TRUE) {
-            echo "Availability updated successfully.";
+            echo "<script>alert('avaiability status updated'); window.location.href = 'worker_profile.php';</script>";
         } else {
             echo "Error updating availability: " . $connection->error;
         }
@@ -49,23 +50,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "Error updating request status: " . $connection->error;
         }
     }
-
-    // Handle review and rating submission
-    if (isset($_POST['submit_review'])) {
-        $worker_email = $_POST['worker_email'];
-        $client_email = $_POST['client_email'];
-        $rating = $_POST['rating'];
-        $comment = $_POST['comment'];
-
-        // Insert the review and rating into the database
-        $insertReviewSql = "INSERT INTO review (worker_email, client_email, rating, comment) VALUES ('$worker_email', '$client_email', $rating, '$comment')";
-        if ($connection->query($insertReviewSql) === TRUE) {
-            echo "Review submitted successfully.";
-        } else {
-            echo "Error submitting review: " . $connection->error;
-        }
-    }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -76,7 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link href="https://cdn.jsdelivr.net/npm/daisyui@3.5.1/dist/full.css" rel="stylesheet" type="text/css" />
     <title>Workers Information</title>
     <style>
-         body {
+        body {
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
@@ -85,10 +71,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         .header {
             color: black;
-            font-weight: 700;
+            font-weight: 600;
             font-size: 30px;
             text-align: center;
             margin-top: 20px;
+        }
+
+        .success-message {
+            text-align: center;
+            color: green;
+            padding: 10px;
+
         }
 
         .card-container {
@@ -115,7 +108,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         .card img {
             max-width: 300px;
             height: 200px;
-            border-radius: 50%;
+            border-radius: 10%;
         }
 
         .card-info {
@@ -135,6 +128,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             padding-top: 10px;
             font-weight: 600;
         }
+
+        .button-form {
+            text-align: center;
+            margin-top: 10px;
+
+        }
+
+        .btn-available,
+        .btn-unavailable {
+            padding: 8px 16px;
+            margin: 5px;
+            margin-bottom: 4px; ;
+            /* border: none; */
+            border-radius: 54px;
+            border: 1PX SOLID black;
+            cursor: pointer;
+            font-size: 14px;
+            color: blue;
+            background-color: #27ae60;
+            transition: background-color 0.3s;
+        }
+
+        .btn-available {
+            background-color: #2ecc71;
+        }
+
+        .btn-unavailable {
+            background-color: #e74c3c;
+        }
+
+        .btn-available:hover,
+        .btn-unavailable:hover {
+            background-color: #27ae60;
+        }
     </style>
 </head>
 
@@ -142,13 +169,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="nav bg-gray-300 rounded-xl">
         <div class="navbar">
             <div class="navbar-start">
-                <a href="http://localhost/urban-workers/index.html"
-                    class="text-green-900 font-weight:900 btn btn-ghost normal-case text-2xl font-bold">Urban Workers</a>
+                <a href="http://localhost/urban-workers/index.html" class="text-green-900 font-weight:900 btn btn-ghost normal-case text-2xl font-bold">Urban Workers</a>
             </div>
         </div>
     </div>
 
-    <p class="header">Workers Information - <?php echo $_SESSION['email']; ?></p>
+    <p class="header"><b>Workers Information</b> <br> <?php echo $_SESSION['email']; ?></p>
     <hr>
     <div class="card-container">
         <?php
@@ -169,12 +195,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <p>Address: " . $result['address'] . "</p>
                     <p>Contact: " . $result['contact'] . "</p>
                     <p>Status: " . $result['availability'] . "</p>
+                    <p>Rating: " . $result['ratings'] . "</p>
+                    <p>admin approval status: " . $result['status'] . "</p>
+                    <p>Experienced: " . $result['work_experience'] . "</p>
                 </div>
-                <form method='post'>
-                    <input type='hidden' name='email' value='" . $email . "'>
-                    <input type='submit' name='approve' value='Available' />
-                    <input type='submit' name='reject' value='Unavailable' />
-                </form>
+
+                
+                 
+
+                <form method='post' class='button-form'>
+                <input type='hidden' name='email' value='" . $email . "'>
+                <input type='submit' name='approve' value='Available' class='btn-available' />
+                <input type='submit' name='reject' value='Unavailable' class='btn-unavailable' />
+            </form>
+            
             </div>";
 
             // Display hire requests and review forms
@@ -192,22 +226,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <input type='hidden' name='email' value='" . $email . "'>
                             <input type='hidden' name='worker_email' value='" . $result['email'] . "'>
                             <input type='hidden' name='client_email' value='" . $hireRequestResult['client_email'] . "'>
-                            <input type='submit' name='approve_request' value='Approve Request' />
+                            <input type='submit' name='approve_request' value='Approve Request' class='btn-available' />
                         </form>";
                     echo "<form method='post'>
                             <input type='hidden' name='email' value='" . $email . "'>
                             <input type='hidden' name='worker_email' value='" . $result['email'] . "'>
                             <input type='hidden' name='client_email' value='" . $hireRequestResult['client_email'] . "'>
-                            <input type='submit' name='reject_request' value='Reject Request' />
+                            <input type='submit' name='reject_request' value='Reject Request' class='btn-unavailable' />
                         </form>";
                     echo "</div>";
-
-                    
                 }
                 echo "</div>";
             }
         } else {
-            echo "<p>No data available</p>";
+            echo "<p>No worker available</p>";
         }
 
         // Close the database connection

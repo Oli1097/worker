@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,7 +27,7 @@
       </div>
     </div>
   </div>
-  <!-- component -->
+
   <form method="POST" action="php/signupWorker.php" enctype="multipart/form-data">
     <div class="min-h-screen text-black-900 p-6 bg-gray-100 flex items-center justify-center">
       <div class="container max-w-screen-lg mx-auto">
@@ -76,25 +77,48 @@
 
                   <div class="md:col-span-3 font-bold text-gray-600 ">
                     <label>Your service</label>
+                   
                     <div class="h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
-
+                      
                       <select name="services" class="h-10 border mt-1 text-large font-bold rounded px-4 py-2 w-full bg-gray-100">
                         <option class="ser" value="Home Tutor">Home Tutor</option>
                         <option class="ser" value="Health Care">Health Care</option>
-                        <option class="ser" value="Car Servicing">Car Servicing</option>
-                        <option class="ser" value="Laundry Servicing">Laundry Servicing</option>
+                        <option class="ser" value="Car Services">Car Services</option>
+                        <option class="ser" value="Laundry Services">Laundry Services</option>
 
                         <option class="ser" value="AC Servicing">AC Servicing</option>
                         <option class="ser" value="Painting Servicing">Painting Servicing</option>
                         <option class="ser" value="Home cleaning">Home cleaning</option> 
-                        <option class="ser" value="Plumbing Servicing">Plumbing Servicing</option>
+                        <option class="ser" value="Plumbing Services">Plumbing Services</option>
 
-                        <option class="ser" value="Shifting Servicing">Shifting Servicing</option>
+                        <option class="ser" value="Shifting Services">Shifting Services</option>
                         <option class="ser" value="Beauty Care">Beauty Care</option>
-                        <option class="ser" value="laptop Servicing">laptop Servicing</option>
+                        <option class="ser" value="laptop Services">laptop Services</option>
                         <option class="ser" value="CCTV Servicing ">CCTV Servicing</option>
                         
-                        <!-- Add more options here -->
+                        <?php
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $database = "urban-workers1";
+    $conn = new mysqli($servername, $username, $password, $database);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $selectServices = "SELECT service_name FROM addnewservices";
+    $result = $conn->query($selectServices);
+
+    while ($row = $result->fetch_assoc()) {
+        echo '<option class="ser" value="' . $row['service_name'] . '">' . $row['service_name'] . '</option>';
+        // echo "$row['service_name']";
+      
+    }
+
+    $conn->close();
+    ?>
+    
+                        
                       </select>
                     </div>
                   </div>
@@ -103,10 +127,15 @@
                     <input type="" name="contact" id="number" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                       value="" placeholder="+880" required/>
                   </div>
-                  <div class="md:col-span-5 font-bold text-gray-600 mb-1">
+                  <div class="md:col-span-3 font-bold text-gray-600 mb-1">
                     <label for="work_experience">work_experience</label>
                     <input type="text" name="work_experience" id="work_experience"
-                      class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" placeholder="" />
+                      class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" placeholder="add your experiences " />
+                  </div>
+                  <div class="md:col-span-2 font-bold text-gray-600 mb-1">
+                    <label for="work_experience">Honorarium</label>
+                    <input type="" name="Honorarium" id="Honorarium"
+                      class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" placeholder="Per hour Amount" />
                   </div>
                  
                   
@@ -141,6 +170,7 @@
               <div class="md:col-span-5 text-right">
                 <div class="inline-flex items-end">
                   <input type="submit" value="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                  
                  
 
                 </div>

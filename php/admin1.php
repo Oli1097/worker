@@ -14,11 +14,11 @@ $clientCountQuery = "SELECT COUNT(*) as client_count FROM clientsignup";
 $clientCountResult = $conn->query($clientCountQuery);
 $clientCountRow = $clientCountResult->fetch_assoc();
 
-$workerCountQuery = "SELECT COUNT(*) as worker_count FROM signupworkers";
+$workerCountQuery = "SELECT COUNT(*) as worker_count FROM signupworkers where status='accepted'";
 $workerCountResult = $conn->query($workerCountQuery);
 $workerCountRow = $workerCountResult->fetch_assoc();
 
-$approvedWorkerCountQuery = "SELECT COUNT(*) as approved_worker_count FROM signupworkers WHERE approval = 1";
+$approvedWorkerCountQuery = "SELECT COUNT(*) as approved_worker_count FROM signupworkers WHERE status='accepted'";
 $approvedWorkerCountResult = $conn->query($approvedWorkerCountQuery);
 $approvedWorkerCountRow = $approvedWorkerCountResult->fetch_assoc();
 

@@ -356,4 +356,24 @@
   text-align: center;
   text-decoration: none;
   cursor: pointer;
+  border-radius: 30px;
+}
+.email{
+  border: 1px solid black;
+  border-radius: 20px;
+  padding: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  background-color: #eae6f5;
+  color: black;
+}
+.email:hover{
+  background-color: #27048a;
+  color: #eae6f5;
+
+}
+.btn-signup-red:hover{
+  background-color: rgb(20, 19, 19);
+  
+
 }

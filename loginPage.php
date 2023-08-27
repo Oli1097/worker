@@ -30,25 +30,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </div>
     </div>
-    <!-- component -->
-    <div class="hero min-h-screen bg-base-400">
-        <div class="hero-content flex-col">
+   
+    <div class="hero w-full h-screen shadow-xl bg-white-100">
+        <div class="hero-content flex-col w-full bg-black-100">
             <div class="text-center lg:text-left">
                 <h1 class="text-5xl font-bold">
                     Login Here for Services<br>
                 </h1>
-                <p class="py-6"></p>
+                <p class="py-5"></p>
             </div>
-            <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+            <div class="card flex-shrink-0 w-1/2 shadow-2xl bg-gray-300">
                 <div class="card-body">
                     <form action="" method="POST">
-                        <div class="form-control">
+                        <div class="form-control ">
                             <label class="label">
-                                <span class="label-text">Email</span>
+                                <span class="label-text text-xl text-black-800">Email</span>
                             </label>
                             <input type="text" placeholder="Email" name="email" class="input input-bordered" />
                         </div>
-                        <div class="md:col-span-3 font-semibold text-gray-600 mb-1 password-input">
+                        <div class="md:col-span-3  mt-2 font-semibold text-gray-900 mb-1 password-input">
                             <label for="email">Password</label>
                             <div class="password-input-wrapper">
     <input type="password" name="pass" id="password" class="h-10 border mt-1 rounded px-4 w-full bg-gray-100" value="" placeholder="" />

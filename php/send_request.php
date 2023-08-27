@@ -1,5 +1,4 @@
 <?php
-
 session_start(); // Make sure to start the session
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -24,9 +23,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                       VALUES ('$request_id', '$client_email', '$worker_email', '$status')";
    
         if ($conn->query($insertSql) === TRUE) {
-            echo "Request sent successfully.";
+            echo "<script>alert('work request successfully'); window.location.href = '../index1.php';</script>";
         } else {
-            echo "Error sending request: " . $conn->error;
+            echo $conn->error; // Return the error message
         }
         
         $conn->close();
@@ -36,5 +35,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 } else {
     echo "Invalid request method.";
 }
-
 ?>

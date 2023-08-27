@@ -42,7 +42,7 @@
                     <?php
                     session_start();
                     if (isset($_SESSION['email'])) {
-                        echo '<a href="php/user_info.php">' . $_SESSION['email'] . '</a>';
+                        echo '<a href="php/user_info.php" class="email">' . $_SESSION['email'] . '</a>';
                         // header("Location: ../index.html"); // Redirect to main page
 
                         //echo '<a href="index.html">Logout</a>';
@@ -57,41 +57,28 @@
                 </div>
             </div>
         </div>
+        
     </div>
-    <header class="max">
-        <div class="container">
-            <div class="theme">
-                <h1>
-                    Find the right service <br>
-                    right away
-                </h1>
-                <p>
-                    Forget the old rules. You can have the best people.<br>
-                    Right now. Right here.
-                </p>
-                <!-- <form action="">
-                  <input type="" placeholder="Enter your email here" required>
-                  <button class="btn3" type="submit">Subscribe</button>
-              </form> -->
-                <div class="Search">
-                    <form action="" class="mt-10 text-2xl text-gray-600">
-                        <input type="text" placeholder="Search here" class=" Search my-1 px-20 py-3 border-2 border-gray-200 rounded-xl bg-gray-300">
-                        <button type="submit" class="btn3 bg-green-600 rounded-2xl px-6 py-3 ml-1 text-white mr-">Search</button>
-                    </form>
-                </div>
+    
+    <div class="Search">
+    <select name="services" class="h-10 mx-20 border mt-1 text-large font-bold rounded px-4 py-2 w-full bg-gray-100">
+    <option class="ser" value="Search">Serach</option>
+                        <option class="ser" value="Home Tutor">Home Tutor</option>
+                        <option class="ser" value="Health Care">Health Care</option>
+                        <option class="ser" value="Car Services">Car Services</option>
+                        <option class="ser" value="Laundry Services">Laundry Services</option>
 
+                        <option class="ser" value="AC Servicing">AC Servicing</option>
+                        <option class="ser" value="Painting Servicing">Painting Servicing</option>
+                        <option class="ser" value="Home cleaning">Home cleaning</option> 
+                        <option class="ser" value="Plumbing Services">Plumbing Services</option>
 
-
-            </div>
-            <div class="pic">
-                <img src="images/working-man.jpg" alt="">
-            </div>
-
-        </div>
-
-    </header>
-
-   
+                        <option class="ser" value="Shifting Services">Shifting Services</option>
+                        <option class="ser" value="Beauty Care">Beauty Care</option>
+                        <option class="ser" value="laptop Services">laptop Services</option>
+                        <option class="ser" value="CCTV Servicing ">CCTV Servicing</option>
+    </select>            
+     </div>
     <section class="our-Services" id="service">
         <div class="Services">
             <h1>Our Services
@@ -150,7 +137,7 @@
                     <!-- </a> -->
             </div>
             <div class="box">
-                <!-- <a href="php/fetch.php?service=Plumbing%20Services"> -->
+                <a href="php/fetch.php?service=Plumbing%20Services">
                 <img src="images/plumb.webp" alt="Plumbing Services">
                 <h1>Plumbing Services</h1>
                 <!-- </a> -->
@@ -184,6 +171,39 @@
                     <img src="images/cctv.jpg" alt="">
                     <h1>CCTV Servicing</h1> </a>
             </div>
+        </div>
+        <div class="allServices max">
+
+            <div class="box">
+            <a href="php/fetch.php?service=New%20Service">
+                <img src=".jpg" alt="New Service">
+
+
+                                    <?php
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $database = "urban-workers1";
+    $conn = new mysqli($servername, $username, $password, $database);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $selectServices = "SELECT service_name FROM addnewservices";
+    $result = $conn->query($selectServices);
+
+    while ($row = $result->fetch_assoc()) {
+        // echo '<option class="ser" value="' . $row['service_name'] . '">' . $row['service_name'] . '</option>';
+        // echo "$row['service_name']";
+
+    }
+
+    $conn->close();
+    ?>
+    
+
+            </a>
+        </div></div>
 
         </div>
 
@@ -214,9 +234,7 @@
                             We are providing a better facility
                         </h2>
                         <p class="mb-4 text-base leading-7 text-gray-500 dark:text-gray-900">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                            incididunt ut
-                            labore et dolore magna aliqua. Ut enim ad minim veniam
+                        Welcome to Urban Workers, your ultimate solution for connecting local workers with the services you need. Our platform is dedicated to bridging the gap between skilled workers and individuals seeking their expertise. We are committed to providing a seamless and efficient experience, allowing you to easily find and book professionals for various tasks, including plumbing, electrical work, and house cleaning.
                         </p>
                         <ul class="mb-10">
                             <li class="flex items-center mb-4 text-base text-gray-600 dark:text-gray-900">
@@ -225,7 +243,7 @@
                                         <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
                                     </svg>
                                 </span>
-                                Art and Programs
+                                worker based services
                             </li>
                             <li class="flex items-center mb-4 text-base text-gray-600 dark:text-gray-900">
                                 <span class="mr-3 text-blue-500 dark:text-blue-400">
@@ -233,7 +251,7 @@
                                         <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
                                     </svg>
                                 </span>
-                                Value for money
+                                Not profitable Policy
                             </li>
                             <li class="flex items-center mb-4 text-base text-gray-600 dark:text-gray-900">
                                 <span class="mr-3 text-blue-500 dark:text-blue-400">
@@ -241,7 +259,7 @@
                                         <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
                                     </svg>
                                 </span>
-                                Support Team
+                                Good services
                             </li>
                             <li class="flex items-center mb-4 text-base text-gray-600 dark:text-gray-900">
                                 <span class="mr-3 text-blue-500 dark:text-blue-400 ">
@@ -249,7 +267,7 @@
                                         <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
                                     </svg>
                                 </span>
-                                Successful Growth for business
+                                Good Relation between worker and client 
                             </li>
                         </ul>
                         <a href="#" class="px-4 py-2 text-gray-100 bg-blue-500 rounded-md dark:bg-blue-900 dark:hover:bg-blue-500 hover:bg-blue-600">
@@ -305,61 +323,77 @@
 
     <section id="faq">
 
-        <!-- <div class="container"> --> -->
-        <h1 class="text-4xl font-bold text-black-400 mb-7 text-center mt-10">
-            "Most common questions about us 🔥"
+            <!-- <div class="container"> -->
+                <h1 class="text-4xl font-bold text-black-400 mb-7 text-center mt-10">
+                    "Most common questions about us 🔥"
 
-        </h1>
-        <div class="collapse-container">
-            <div class="collapse mb-2 px-20 collapse-arrow bg-base-200">
-                <input type="radio" name="my-accordion-2" checked="checked" />
-                <div class="collapse-title text-2xl font-medium">
-                    Click to open this one and close others
-                </div>
-                <div class="collapse-content">
-                    <p>Answer 1 for the first question.</p>
-                </div>
-            </div>
-            <div class="collapse mb-2 collapse-arrow bg-base-200">
-                <input type="radio" name="my-accordion-2" />
-                <div class="collapse-title text-xl font-medium">
-                    Click to open this one and close others
-                </div>
-                <div class="collapse-content">
-                    <p>Answer 2 for the second question.</p>
-                </div>
-            </div>
-            <div class="collapse mb-2 collapse-arrow bg-base-200">
-                <input type="radio" name="my-accordion-2" />
-                <div class="collapse-title text-xl font-medium">
-                    Click to open this one and close others
-                </div>
-                <div class="collapse-content">
-                    <p>Answer 3 for the third question.</p>
-                </div>
-            </div>
-            <div class="collapse mb-2 collapse-arrow bg-base-200">
-                <input type="radio" name="my-accordion-2" />
-                <div class="collapse-title text-xl font-medium">
-                    Click to open this one and close others
-                </div>
-                <div class="collapse-content">
-                    <p>Answer 4 for the fourth question.</p>
-                </div>
-            </div>
-            <div class="collapse mb-2collapse-arrow bg-base-200">
-                <input type="radio" name="my-accordion-2" />
-                <div class="collapse-title text-xl font-medium">
-                    Click to open this one and close others
-                </div>
-                <div class="collapse-content">
-                    <p>Answer 5 for the fifth question.</p>
-                </div>
-            </div>
-        </div>
-        <!-- </div> -->
+                </h1>
+                <div class="collapse-container">
+                    <div class="collapse mb-3 collapse-arrow bg-base-200">
+                        <input type="radio" name="my-accordion-2" checked="checked" />
+                        <div class="collapse-title text-2xl font-medium">
+                            1. What is "Urban Workers"?
+                        </div>
+                        <div class="collapse-content">
+                            <p class="text-gray-700 font-medium">
+                                "Urban Workers" is a platform where you can find local workers for various services like plumbing, cleaning, Home Tutor and more. It makes it easy to connect with skilled workers in your area                         </p>
+                        </div>
+                    </div>
+                    <div class="collapse mb-3 collapse-arrow bg-base-200">
+                        <input type="radio" name="my-accordion-2" />
+                        <div class="collapse-title text-xl font-medium">
+                            2. How do I create an account?
+                        </div>
+                        <div class="collapse-content">
+                            <p class="text-gray-700 font-medium">
+                                Creating an account is easy:<br>
 
-    </section>
+                                -Click on the "Sign Up" button.<br>
+                                -Fill in your details and choose your role (worker or client).<br>
+                                -Submit your info                         </p>
+                        </div>
+                    </div>
+                    <div class="collapse mb-3 collapse-arrow bg-base-200">
+                        <input type="radio" name="my-accordion-2" />
+                        <div class="collapse-title text-xl font-medium">
+                            3. Can I review and rate workers?
+                        </div>
+                        <div class="collapse-content">
+                            <p class="text-gray-700 font-medium">
+                                Yes, after receiving a service, clients can provide feedback by leaving a review and rating on the worker's profile. This helps build a community of trust and transparency, allowing others to make informed decisions when choosing a worker.                            </p>
+                        </div>
+                    </div>
+                    <div class="collapse mb-3 collapse-arrow bg-base-200">
+                        <input type="radio" name="my-accordion-2" />
+                        <div class="collapse-title text-xl font-medium">
+                            4. How do I hire a worker?
+                        </div>
+                        <div class="collapse-content">
+                            <p class="text-gray-700 font-medium">
+                                Hiring a worker is simple:<br>
+
+                               - Browse worker profiles.<br>
+                               - Choose a service you need.<br>
+                               - contact with worker given contact number                        </p>
+                        </div>
+                    </div>
+                    <div class="collapse mb-3 collapse-arrow bg-base-200">
+                        <input type="radio" name="my-accordion-2" />
+                        <div class="collapse-title text-xl font-medium">
+                            5: Q: What payment methods are available on the platform?
+
+
+
+                        </div>
+                        <div class="collapse-content">
+                            <p class="text-gray-700 font-medium">
+                                Services are paid in cash directly to the worker after the service is done, ensuring a straightforward and immediate transaction for both clients and workers.                            </p>
+                        </div>
+                    </div>
+                </div>
+            <!-- </div> -->
+        
+        </section>
 
 
 
